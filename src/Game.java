@@ -1,15 +1,20 @@
 import processing.core.PApplet;
+import processing.core.PImage;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Game extends PApplet {
-    // TODO: declare game variables
+    ArrayList<Card> deck = new ArrayList<>();
+
+    PImage table = loadImage("PokerTable.jpeg");
 
     public void settings() {
-        size(800, 800);   // set the window size
+        size(612, 357);
 
     }
 
     public void setup() {
-        // TODO: initialize game variables
     }
 
     /***
@@ -17,11 +22,25 @@ public class Game extends PApplet {
      * tick each object (have it update itself), and draw each object
      */
     public void draw() {
-        background(255);    // paint screen white
-        fill(0,255,0);          // load green paint color
-        ellipse(mouseX, mouseY, 60, 60);  // draw circle at mouse loc
-        ellipse(mouseX - 80, mouseY, 60, 60);  // draw circle at mouse loc
-        ellipse(mouseX + 80, mouseY, 60, 60);  // draw circle at mouse loc
+        image(table, 0, 0);
+    }
+
+    public void initializeDeck(){
+        for (int value = 1; value <= 13; value++) {
+            for (int suite = 1; suite <= 4; suite++) {
+                Card card = new Card(value, suite);
+                deck.add(card);
+            }
+        }
+
+        Collections.shuffle(deck);
+    }
+
+    public void initializeBoard(){
+        initializeDeck();
+        Player P1 = new Player(1000, true);
+        Player P2 = new Player(1000, false);
+
     }
 
     public static void main(String[] args) {
