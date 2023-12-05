@@ -11,7 +11,7 @@ public class Player {
 
     public Player(int chips, boolean bigBind){
         this.chips = chips;
-        this.bigBind = bigBind
+        this.bigBind = bigBind;
     }
 
     public void bet(int bet){
@@ -33,6 +33,6 @@ public class Player {
     }
 
     public void act(){
-        int decision = JOptionPane.showOptionDialog()
+//        int decision = JOptionPane.showOptionDialog();
     }
 }
