@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 public class Player {
 
-    int chips;
-    int bet;
-    boolean bigBind;
+    private int chips;
+    private int bet;
+    private boolean bigBind;
     ArrayList<Card> hand = new ArrayList<>();
 
 

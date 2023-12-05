@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Card> hand = new ArrayList<>();
+    private ArrayList<Card> hand;
 
     public Hand(ArrayList<Card> cards){
         hand = cards;
@@ -30,39 +30,40 @@ public class Hand {
     }
 
     public int getTiebreakerValue(){
-        if (identicalCards() >= 400 && identicalCards() <= 499) {
-            return identicalCards() - 400;
-        } else if (identicalCards() >= 500) {
-            return identicalCards() - 500;
-        } else if (identicalCards() >= 300 && identicalCards() <= 399) {
-            return identicalCards() - 300;
-        } else if (identicalCards() >= 200 && identicalCards() <= 299) {
-            return identicalCards() - 200;
-        } else if (identicalCards() >= 100 && identicalCards() <= 199) {
-            return identicalCards() - 100;
+        if (getOrder() == 8 || getOrder() == 7 || getOrder() == 4 || getOrder() == 3 ||getOrder() == 2){
+            return identicalCards()%100;
         }else return highestFaceValue();
     }
 
     public boolean isStraight(){
         int sequenceCounter = 0;
         for (int i = 0; i < hand.size() - 1; i++) {
-            if (hand.get(i).getFaceValue() == hand.get(i + 1).getFaceValue() + 1){
+            if (hand.get(i).getFaceValue() == hand.get(i + 1).getFaceValue() - 1){
                 sequenceCounter++;
             }
         }
 
-        if (sequenceCounter == 4){
-            return true;
+        if (sequenceCounter == 4)return true;
+
+        if (hand.get(4).getFaceValue() == 1){
+            int seqCounter2 = 0;
+            for (int i = 0; i < hand.size() - 2; i++) {
+                if (hand.get(i).getFaceValue() == hand.get(i + 1).getFaceValue() - 1)seqCounter2++;
+                if (seqCounter2 == 3 && hand.get(0).getFaceValue() == 10) return true;
+            }
         }
 
         return false;
     }
 
     public boolean isRoyalFlush(){
-        if (isStraight() && isFlush()){
-            if (hand.get(0).getFaceValue() == 13){
-                return true;
+        if (isFlush()){
+            int seqCounter = 0;
+            for (int i = 0; i < hand.size() - 2; i++) {
+                if (hand.get(i).getFaceValue() == hand.get(i + 1).getFaceValue() - 1)seqCounter++;
             }
+
+            if (seqCounter == 3 && hand.get(4).getFaceValue() == 1 && hand.get(0).getFaceValue() == 10)return true;
         }
 
         return false;
@@ -71,14 +72,10 @@ public class Hand {
     public boolean isFlush(){
         int sameCounter = 0;
         for (int i = 0; i < hand.size() - 1; i++) {
-            if (hand.get(i).getSuite() == hand.get(i + 1).getSuite()){
-                sameCounter++;
-            }
+            if (hand.get(i).getSuite() == hand.get(i + 1).getSuite())sameCounter++;
         }
 
-        if (sameCounter == 4){
-            return true;
-        }
+        if (sameCounter == 4) return true;
 
         return false;
     }
