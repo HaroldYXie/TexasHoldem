@@ -1,6 +1,6 @@
 public class Card {
-    int faceValue;
-    int suite;
+    private int faceValue;
+    private int suite;
 
     public Card(int faceValue, int suite){
         this.faceValue = faceValue;
