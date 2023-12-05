@@ -5,16 +5,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Game extends PApplet {
-    ArrayList<Card> deck = new ArrayList<>();
-
-    PImage table = loadImage("PokerTable.jpeg");
+    ArrayList<Card> deck;
+    PImage background;
 
     public void settings() {
-        size(612, 357);
+        size(1000, 492);
 
     }
 
     public void setup() {
+        background = loadImage("APCS.PokerTable.jpeg");
+        deck = new ArrayList<>();
     }
 
     /***
@@ -22,7 +23,7 @@ public class Game extends PApplet {
      * tick each object (have it update itself), and draw each object
      */
     public void draw() {
-        image(table, 0, 0);
+        image(background, 0, 0);
     }
 
     public void initializeDeck(){
@@ -40,7 +41,13 @@ public class Game extends PApplet {
         initializeDeck();
         Player P1 = new Player(1000, true);
         Player P2 = new Player(1000, false);
+    }
 
+    public void playerSwitch(int playerNum){
+        fill(0, 0 , 0);
+        rect(0, 0, 1000, 492);
+        fill(255, 255, 255);
+        text("Player " + playerNum + "'s turn is over. Press p to continue to your turn", 400, 240);
     }
 
     public static void main(String[] args) {

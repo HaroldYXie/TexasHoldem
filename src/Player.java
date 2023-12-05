@@ -11,7 +11,7 @@ public class Player {
 
     public Player(int chips, boolean bigBind){
         this.chips = chips;
-        this.bigBind = bigBind
+        this.bigBind = bigBind;
     }
 
     public void bet(int bet){
@@ -33,6 +33,12 @@ public class Player {
     }
 
     public void act(){
-        int decision = JOptionPane.showOptionDialog()
+        String[] options = {"Check", "Bet", "Fold"};
+
+        int selection = JOptionPane.showOptionDialog(null, "Select One: ", "Main Window", 0, 3, null, options, options[0]);
+
+        if (selection == 1){
+            int betValue = Integer.parseInt(JOptionPane.showInputDialog("How much would you like to bet?"));
+        }
     }
 }
