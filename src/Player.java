@@ -19,7 +19,6 @@ public class Player {
             chips -= bet;
         }
     }
-
     public void replaceHand(ArrayList<Card> newHand){
         hand = newHand;
     }
