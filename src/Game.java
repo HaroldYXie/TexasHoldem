@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Game extends PApplet {
-    private ArrayList<Card> deck;
     private ArrayList<Card> table;
-    private ArrayList<Player> players;
+    private Player P1;
+    private Player P2;
     private int playerTurn = 0;
     private boolean switchScreen = false;
-    private int pot = 0;
     private PImage background;
 
     public void settings() {
@@ -19,7 +18,6 @@ public class Game extends PApplet {
 
     public void setup() {
         background = loadImage("assets/APCS.PokerTable.jpeg");
-        deck = new ArrayList<>();
     }
 
     /***
@@ -38,25 +36,42 @@ public class Game extends PApplet {
     public void keyPressed() {
         if ((key == 'p' || key == 'P') && switchScreen) {
             switchScreen = false;
-            playerTurn = (playerTurn + 1) % players.size();
         }
     }
-    public void initializeDeck(int amount){
-        // Common in casinos to use multiple decks together to prevent card counting
-        for (int i = 0; i < amount; i++) {
+    public ArrayList<Card> initializeDeck(){
+        ArrayList<Card> deck = new ArrayList<>();
+
             for (int value = 1; value <= 13; value++) {
                 for (int suite = 1; suite <= 4; suite++) {
                     deck.add(new Card(value, suite));
                 }
             }
-        }
         Collections.shuffle(deck);
+
+            return deck;
     }
 
     public void initializeBoard(){
-        initializeDeck(3);
-        Player P1 = new Player(1000, true);
-        Player P2 = new Player(1000, false);
+        P1 = new Player(2000, true);
+        P2 = new Player(2000, false);
+    }
+
+    public void runGame(){
+        ArrayList<Card> deck = initializeDeck();
+        for (int i = 0; i < 3; i++) {
+            table.add(deck.remove(0));
+        }
+
+        ArrayList<Card> P1Hand = new ArrayList<>();
+        ArrayList<Card> P2Hand = new ArrayList<>();
+
+        for (int i = 0; i < 2; i++) {
+            P1Hand.add(deck.remove(0));
+            P2Hand.add(deck.remove(0));
+        }
+
+        P1.giveHand(P1Hand);
+        P2.giveHand(P2Hand);
     }
 
 

@@ -1,6 +1,4 @@
 import processing.core.PImage;
-import processing.core.PApplet;
-import processing.core.PImage;
 
 public class Card {
     private int faceValue;
@@ -21,5 +19,12 @@ public class Card {
 
     public int getSuite(){
         return suite;
+    }
+
+    public String getFileName(){
+        String returnString = "Sprites/APCS.";
+        returnString += faceValue + "." + suite + ".jpeg";
+
+        return returnString;
     }
 }

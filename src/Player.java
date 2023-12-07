@@ -5,13 +5,13 @@ public class Player {
 
     private int chips;
     private int bet;
-    private boolean bigBind;
+    private boolean bigBlind;
     ArrayList<Card> hand = new ArrayList<>();
 
 
-    public Player(int chips, boolean bigBind){
+    public Player(int chips, boolean bigBlind){
         this.chips = chips;
-        this.bigBind = bigBind;
+        this.bigBlind = bigBlind;
     }
 
     public void bet(int bet){
@@ -20,8 +20,8 @@ public class Player {
         }
     }
 
-    public void replaceHand(ArrayList<Card> newHand){
-        hand = newHand;
+    public void giveHand(ArrayList<Card> hand){
+        this.hand = hand;
     }
 
     public void call(int minChips){
