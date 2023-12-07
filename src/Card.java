@@ -1,4 +1,6 @@
 import processing.core.PImage;
+import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Card {
     private int faceValue;
@@ -6,12 +8,21 @@ public class Card {
 
     private PImage image;
 
-    public Card(int faceValue, int suite){
+    public Card(int faceValue, int suite, PImage atlas){
         this.faceValue = faceValue;
         this.suite = suite;
+        this.image = cropCard(faceValue, suite, atlas);
     }
-    public String getImagePath() {
-        return "assets/card/card" + suite + "-" + faceValue + ".png";
+    public PImage cropCard(int face, int suite, PImage atlas) {
+        PImage out = new PImage(44, 68);
+        out.copy(
+                atlas,
+                33 + face * 391, 33 + suite * 569,
+                356, 535,
+                0,0,
+                out.width, out.height
+        );
+        return out;
     }
     public int getFaceValue(){
         return faceValue;
@@ -20,11 +31,7 @@ public class Card {
     public int getSuite(){
         return suite;
     }
-
-    public String getFileName(){
-        String returnString = "Sprites/APCS.";
-        returnString += faceValue + "." + suite + ".jpeg";
-
-        return returnString;
+    public PImage getImage() {
+        return image;
     }
 }
