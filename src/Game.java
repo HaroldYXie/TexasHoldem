@@ -38,6 +38,8 @@ public class Game extends PApplet {
         } else {
             image(background, 0, 0);
             Player p = playerTurn == 0 ? p1 : p2;
+            Player other = playerTurn == 0 ? p2 : p1;
+
             for (int i = 0; i < table.size(); i++) {
                 image(table.get(i).getImage(), 360 + i * 58, 210);
             }
@@ -48,6 +50,8 @@ public class Game extends PApplet {
             text("You are player: " + playerTurn, 0,50);
             text("You have: " + p.chips, 0, 75);
             text("Prize pool is: " + pot, 0,100 );
+            text("You are betting: " + p.bet, 0, 125);
+            text("Other has bet: " + other.bet, 0, 150);
             if (timeSinceChange > 20) {
                 timeSinceChange = 0;
                 handleGameRound(p);
@@ -82,10 +86,14 @@ public class Game extends PApplet {
             return;
         }
         finishedTurns = false;
+        pot += p1.bet;
+        pot += p2.bet;
         p1.bet = 0;
         p2.bet = 0;
+        // TODO: why does this not work
+        p1.chips -= p1.bet;
+        p2.chips -= p2.bet;
 
-        System.out.println("rrr");
         if (board_state == 0) {
             for (int i = 0; i < 2; i++) {
                 p1.hand.add(deck.remove(0));
@@ -103,9 +111,8 @@ public class Game extends PApplet {
         if (board_state == 3) {
             table.add(deck.remove(0));
         }
-        if (board_state == 4) {
-            System.out.println("winner?");
-        }
+        // TODO: WHo won
+        System.out.println("Who won? ");
     }
 
     public static void main(String[] args) {

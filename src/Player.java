@@ -16,7 +16,7 @@ public class Player {
     }
 
     public void bet(int bet){
-        chips -= bet;
+        this.chips = this.chips - bet;
     }
 
     public void giveCard(Card card){
@@ -36,7 +36,7 @@ public class Player {
         int selection = JOptionPane.showOptionDialog(null, "Select One: ", "Main Window", 0, 3, null, options, options[0]);
         if (selection == 1){
             int betValue = Integer.parseInt(JOptionPane.showInputDialog("How much would you like to bet?"));
-            bet = betValue;
+            bet += betValue;
         }
     }
 }
