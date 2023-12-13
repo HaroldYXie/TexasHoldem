@@ -3,8 +3,9 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private int chips;
-    private int bet;
+    int chips;
+    int bet;
+    boolean satisfied;
     private boolean bigBlind;
     ArrayList<Card> hand = new ArrayList<>();
 
@@ -15,13 +16,11 @@ public class Player {
     }
 
     public void bet(int bet){
-        if (bet > 0 && bet <= chips){
-            chips -= bet;
-        }
+        chips -= bet;
     }
 
-    public void giveHand(ArrayList<Card> hand){
-        this.hand = hand;
+    public void giveCard(Card card){
+        this.hand.add(card);
     }
 
     public void call(int minChips){
@@ -31,14 +30,13 @@ public class Player {
     public void fold(){
         chips -= bet;
     }
-
     public void act(){
         String[] options = {"Check", "Bet", "Fold"};
 
         int selection = JOptionPane.showOptionDialog(null, "Select One: ", "Main Window", 0, 3, null, options, options[0]);
-
         if (selection == 1){
             int betValue = Integer.parseInt(JOptionPane.showInputDialog("How much would you like to bet?"));
+            bet = betValue;
         }
     }
 }

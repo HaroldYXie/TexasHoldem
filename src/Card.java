@@ -5,7 +5,6 @@ import processing.core.PImage;
 public class Card {
     private int faceValue;
     private int suite;
-
     private PImage image;
 
     public Card(int faceValue, int suite, PImage atlas){
@@ -14,7 +13,7 @@ public class Card {
         this.image = cropCard(faceValue, suite, atlas);
     }
     public PImage cropCard(int face, int suite, PImage atlas) {
-        PImage out = new PImage(44, 68);
+        PImage out = new PImage(44*8, 68*8);
         out.copy(
                 atlas,
                 33 + face * 391, 33 + suite * 569,
@@ -22,6 +21,7 @@ public class Card {
                 0,0,
                 out.width, out.height
         );
+        out.resize(44,68);
         return out;
     }
     public int getFaceValue(){
