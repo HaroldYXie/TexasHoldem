@@ -88,11 +88,12 @@ public class Game extends PApplet {
         finishedTurns = false;
         pot += p1.bet;
         pot += p2.bet;
-        p1.bet = 0;
-        p2.bet = 0;
         // TODO: why does this not work
         p1.chips -= p1.bet;
         p2.chips -= p2.bet;
+
+        p1.bet = 0;
+        p2.bet = 0;
 
         if (board_state == 0) {
             for (int i = 0; i < 2; i++) {
@@ -112,7 +113,7 @@ public class Game extends PApplet {
             table.add(deck.remove(0));
         }
         // TODO: WHo won
-        System.out.println("Who won? ");
+        System.out.println(Hand.evalWinner(p1,p2,table));
     }
 
     public static void main(String[] args) {

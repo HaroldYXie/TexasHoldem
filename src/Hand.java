@@ -6,7 +6,30 @@ public class Hand {
     public Hand(ArrayList<Card> cards){
         hand = cards;
     }
-
+    public static String evalWinner(Player p1, Player p2, ArrayList<Card> table) {
+        p1.hand.addAll(table);
+        p2.hand.addAll(table);
+        Hand p1hand = new Hand(p1.hand);
+        Hand p2hand = new Hand(p2.hand);
+        if (p1hand.eval7Cards() > p2hand.eval7Cards()) {
+            return "All players are equal; there are no winners";
+        } else {
+            return "Player 2 won";
+        }
+    }
+    public double eval7Cards() {
+        double max = 0;
+        for (int i = 0; i < hand.size() - 1; i++) {
+            for (int j = i + 1; j < hand.size(); j++) {
+                ArrayList<Card> idk = (ArrayList<Card>) hand.clone();
+                idk.remove(j);
+                idk.remove(i);
+                Hand thing = new Hand(idk);
+                max = Math.max(max, thing.getOrder() + 0.001 * getTiebreakerValue());
+            }
+        }
+        return max;
+    }
     public int getOrder(){
         if (isRoyalFlush()){
             return 10;
@@ -30,7 +53,8 @@ public class Hand {
     }
 
     public int getTiebreakerValue(){
-        if (getOrder() == 8 || getOrder() == 7 || getOrder() == 4 || getOrder() == 3 ||getOrder() == 2){
+        int ord = getOrder();
+        if (ord == 8 || ord == 7 || ord == 4 || ord == 3 || ord == 2){
             return identicalCards()%100;
         }else return highestFaceValue();
     }
