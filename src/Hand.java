@@ -14,7 +14,7 @@ public class Hand {
         if (p1hand.eval7Cards() > p2hand.eval7Cards()) {
             return "All players are equal; there are no winners";
         } else {
-            return "Player 2 won";
+            return "Player 1 won, screw you player 0";
         }
     }
     public double eval7Cards() {

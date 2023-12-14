@@ -75,7 +75,6 @@ public class Game extends PApplet {
         Collections.shuffle(deck);
     }
     public void handleGameRound(Player p) {
-        System.out.println(p1.bet + " " + p2.bet + switchScreen + " " + finishedTurns);
         if (p1.bet == p2.bet && p1.bet > 0) {
             finishedTurns = true;
             board_state += 1;
@@ -88,7 +87,7 @@ public class Game extends PApplet {
         finishedTurns = false;
         pot += p1.bet;
         pot += p2.bet;
-        // TODO: why does this not work
+
         p1.chips -= p1.bet;
         p2.chips -= p2.bet;
 
@@ -111,9 +110,8 @@ public class Game extends PApplet {
         }
         if (board_state == 3) {
             table.add(deck.remove(0));
+            System.out.println(Hand.evalWinner(p1,p2,table));
         }
-        // TODO: WHo won
-        System.out.println(Hand.evalWinner(p1,p2,table));
     }
 
     public static void main(String[] args) {
